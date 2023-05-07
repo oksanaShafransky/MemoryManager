@@ -1,6 +1,6 @@
-#MemoryManager
+# MemoryManager
 
-##Implementation Description:
+## Implementation Description:
 The memory manager is implemented as a class, MemoryManager, successor of abstract class MemoryManagerInterface, which has two main methods, allocate and deallocate.
 The MemoryManager class takes a single argument block_size in the constructor, which represents the size of the contiguous block of memory that the manager will manage.
 When an instance of the MemoryManager class is created, it creates a bytearray of a specified size and uses that as the memory block to allocate and deallocate from.
@@ -9,7 +9,7 @@ The allocate method takes a single argument size and returns a pointer to a bloc
 The deallocate method takes a single argument ptr, which is a pointer to a previously allocated block of memory.
 The MemoryManager class keeps track of the free blocks of memory using a list of tuples, where each tuple represents a contiguous block of free memory and contains the starting address and length of the block.
 
-##Algorithm:
+## Algorithm:
 When a request to allocate memory comes in, the allocate method iterates over the list of free blocks and returns the first block that is large enough to satisfy the request.
 If there are no free blocks that are large enough, allocate returns None.
 When a block of memory is deallocated using the deallocate method, the manager checks if the freed block can be merged with any adjacent free blocks.
@@ -24,7 +24,7 @@ For example, the first-fit algorithm may result in more fragmentation of the mem
 Additionally, the list of tuples used to represent free memory blocks can become inefficient as the number of blocks grows large.
 Overall, the choice of memory allocation algorithm and data structure will depend on the specific needs of the program, such as the size of the memory space, the frequency of memory allocations and deallocations, and the tradeoff between memory efficiency and time complexity.
 
-##Possible Optimizations:
+## Possible Optimizations:
 One possible optimization is to keep the list of free blocks sorted by address. This would make it faster to find adjacent free blocks to merge with when deallocating memory.
 Another optimization is to implement a best-fit algorithm for allocating memory, where the manager finds the free block that is closest in size to the requested size.
 This can help reduce fragmentation of the memory over time.
