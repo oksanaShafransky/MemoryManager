@@ -1,6 +1,6 @@
-#MemoryManager
+# MemoryManager
 
-##Implementation Description:
+## Implementation Description:
 The memory manager is implemented as a class, MemoryManager, successor of abstract class MemoryManagerInterface, which has two main methods, allocate, deallocate, read and write.
 The MemoryManager class takes a single argument block_size in the constructor, which represents the size of the contiguous block of memory that the manager will manage.
 When an instance of the MemoryManager class is created, it creates a bytearray of a specified size and uses that as the memory block to allocate and deallocate from.
@@ -13,19 +13,19 @@ This makes the class self-contained and independent of any external memory block
 
 The MemoryManager class keeps track of the free blocks of memory using a list of tuples, where each tuple represents a contiguous block of free memory and contains the starting address and length of the block.
 
-##Algorithm:
+## Algorithm:
 When a request to allocate memory comes in, the allocate method iterates over the list of free blocks and returns the first block that is large enough to satisfy the request.
 If there are no free blocks that are large enough, allocate returns None.
 When a block of memory is deallocated using the deallocate method, the manager checks if the freed block can be merged with any adjacent free blocks.
 If so, the blocks are merged into one larger free block. If not, the freed block is added to the list of free blocks.
 
 The memory manager is implemented using a simple first-fit allocation algorithm and a list of tuples to represent the free blocks of memory.
-##Pros:
+## Pros:
 One advantage of this approach is its simplicity. It is easy to understand and implement, which makes it a good choice for smaller programs or programs with less demanding memory requirements.
 Another advantage of this approach is its flexibility. The MemoryManager class provides an abstraction layer that makes it easy to swap in a different memory allocation algorithm in the future if needed.
 This can be especially useful if the program's memory requirements change over time and a more sophisticated memory allocation algorithm becomes necessary.
 
-##Cons:
+## Cons:
 One potential disadvantage of this approach is that it may not be as efficient as other memory allocation algorithms in terms of both time and space complexity.
 For example, the first-fit algorithm may result in more fragmentation of the memory space, which can reduce the efficiency of memory usage.
 Additionally, the list of tuples used to represent free memory blocks can become inefficient as the number of blocks grows large.
