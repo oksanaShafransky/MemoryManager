@@ -1,13 +1,7 @@
+from typing import Optional
+
 from memeory_manager_interface import MemoryManagerInterface
-
-class MemoryBlock:
-    """
-    Represents a contiguous block of memory.
-    """
-    def __init__(self, start_address, size):
-        self.start_address = start_address
-        self.size = size
-
+from memory_block import MemoryBlock
 
 class MemoryManager(MemoryManagerInterface):
     """
@@ -22,7 +16,7 @@ class MemoryManager(MemoryManagerInterface):
         self.free_blocks = [MemoryBlock(0, size)]
         self.allocated_blocks = []
 
-    def allocate(self, size):
+    def allocate(self, size) -> int:
         """
         Allocate a block of memory of the given size.
         :param size: size of the block to be allocated
@@ -49,7 +43,7 @@ class MemoryManager(MemoryManagerInterface):
         # Unable to find a free block that can accommodate the requested size
         return None
 
-    def deallocate(self, start_address):
+    def deallocate(self, start_address)->None:
         """
         Deallocate the block of memory starting at the given address.
         :param start_address: starting address of the block to be deallocated
@@ -85,5 +79,10 @@ class MemoryManager(MemoryManagerInterface):
                 # The current block and next block are not adjacent, so move on to the next block
                 i += 1
 
+    def read(self, address: int, size: int)-> Optional[bytes]:
+        # Read the specified number of bytes starting from the given start address
+        return bytes(self.memory[address:address + size])
 
-
+    def write(self, address: int, data: int):
+        # Write the given data to the memory starting at the given start address
+        self.memory[address:address + len(data)] = data

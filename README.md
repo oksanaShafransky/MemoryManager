@@ -1,15 +1,19 @@
-# MemoryManager
+#MemoryManager
 
-## Implementation Description:
-The memory manager is implemented as a class, MemoryManager, successor of abstract class MemoryManagerInterface, which has two main methods, allocate and deallocate.
+##Implementation Description:
+The memory manager is implemented as a class, MemoryManager, successor of abstract class MemoryManagerInterface, which has two main methods, allocate, deallocate, read and write.
 The MemoryManager class takes a single argument block_size in the constructor, which represents the size of the contiguous block of memory that the manager will manage.
 When an instance of the MemoryManager class is created, it creates a bytearray of a specified size and uses that as the memory block to allocate and deallocate from.
 This makes the class self-contained and independent of any external memory blocks that may exist.
-The allocate method takes a single argument size and returns a pointer to a block of memory of at least that size, or None if there is not enough free memory to satisfy the request.
-The deallocate method takes a single argument ptr, which is a pointer to a previously allocated block of memory.
+- The allocate method takes a single argument size and returns a pointer to a block of memory of at least that size, or None if there is not enough free memory to satisfy the request.
+- The deallocate method takes a single argument ptr, which is a pointer to a previously allocated block of memory.
+- read - reads the specified number of bytes from the block of memory starting from specified start_address.
+- write - writes the specified data into the block of memory with the specified block size starting from specified start_address. 
+          write method assumes that before its call, the memory is allocated and verified there is enough space (like used in test).
+
 The MemoryManager class keeps track of the free blocks of memory using a list of tuples, where each tuple represents a contiguous block of free memory and contains the starting address and length of the block.
 
-## Algorithm:
+##Algorithm:
 When a request to allocate memory comes in, the allocate method iterates over the list of free blocks and returns the first block that is large enough to satisfy the request.
 If there are no free blocks that are large enough, allocate returns None.
 When a block of memory is deallocated using the deallocate method, the manager checks if the freed block can be merged with any adjacent free blocks.

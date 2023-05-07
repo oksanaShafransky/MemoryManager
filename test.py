@@ -1,4 +1,6 @@
 import unittest
+import pytest
+
 from memory_manager import MemoryManager
 
 class TestMemoryManager(unittest.TestCase):
@@ -33,3 +35,13 @@ class TestMemoryManager(unittest.TestCase):
         self.manager.deallocate(ptr)
         result = self.manager.deallocate(ptr)
         self.assertFalse(result)
+
+    def test_read_write(self):
+        block = self.manager.allocate(21)
+        self.assertIsNotNone(block)
+        msg = b'This is MemoryManager'
+        self.manager.write(block, msg)
+        data = self.manager.read(block, 21)
+        assert data == msg
+
+
