@@ -16,9 +16,12 @@ When a block of memory is deallocated using the deallocate method, the manager c
 If so, the blocks are merged into one larger free block. If not, the freed block is added to the list of free blocks.
 
 The memory manager is implemented using a simple first-fit allocation algorithm and a list of tuples to represent the free blocks of memory.
+###Pros:
 One advantage of this approach is its simplicity. It is easy to understand and implement, which makes it a good choice for smaller programs or programs with less demanding memory requirements.
 Another advantage of this approach is its flexibility. The MemoryManager class provides an abstraction layer that makes it easy to swap in a different memory allocation algorithm in the future if needed.
 This can be especially useful if the program's memory requirements change over time and a more sophisticated memory allocation algorithm becomes necessary.
+
+###Cons:
 One potential disadvantage of this approach is that it may not be as efficient as other memory allocation algorithms in terms of both time and space complexity.
 For example, the first-fit algorithm may result in more fragmentation of the memory space, which can reduce the efficiency of memory usage.
 Additionally, the list of tuples used to represent free memory blocks can become inefficient as the number of blocks grows large.
